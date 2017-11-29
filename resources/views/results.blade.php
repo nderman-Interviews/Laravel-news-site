@@ -1,8 +1,10 @@
 @extends('app')
 
-@section('content')
-    <p>This is my body content.</p>
+@section('title')
+{{$title}}
+@endsection
 
+@section('content')
     @foreach ($articles as $article)
     	@include('snippet', ['title' => $article->title, 'content' => $article->snippet_text])
     @endforeach
