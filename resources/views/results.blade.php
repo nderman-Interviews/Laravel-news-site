@@ -6,7 +6,9 @@
 
 @section('content')
     @foreach ($articles as $article)
-    	@include('snippet', ['title' => $article->title, 'content' => $article->snippet_text])
+    	<ul class="list-group">
+    	@include('snippet', ['artilce' => $article])
+    </ul>
     @endforeach
     {{ $articles->links() }}
 @endsection
