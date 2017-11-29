@@ -14,6 +14,7 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
+
     public function handle($request, Closure $next, $guard = null)
   {
     if (Auth::guard($guard)->guest()) {

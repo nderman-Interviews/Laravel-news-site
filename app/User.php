@@ -37,7 +37,7 @@ class User extends Authenticatable
     // user has many posts
     public function posts()
     {
-        return $this->hasMany('App\Posts', 'author_id');
+        return $this->hasMany('App\Article', 'author_id');
     }
 
     // user has many comments
