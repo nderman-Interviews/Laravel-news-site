@@ -29,4 +29,17 @@ class ArticleController extends Controller
 
         return view('article')->withArticle($article)->withTitle($title);
     }
+
+    public function edit($id)
+    {
+        $article = Article::where('id',$id)->first();
+        if ($article){
+            if (!$article->live){
+                return redirect('/')->withErrors('requested page not found');
+            }
+            $title = $article->title;
+        }
+
+        return view('article')->withArticle($article)->withTitle($title)->withEditing(1);
+    }
 }
