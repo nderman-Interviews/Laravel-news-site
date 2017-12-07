@@ -16,4 +16,17 @@ class ArticleController extends Controller
         $title = 'Latest News';
         return view('results')->withArticles($articles)->withTitle($title);
     }
+
+    public function view($id)
+    {
+        $article = Article::where('id',$id)->first();
+        if ($article){
+            if (!$article->live){
+                return redirect('/')->withErrors('requested page not found');
+            }
+            $title = $article->title;
+        }
+
+        return view('article')->withArticle($article)->withTitle($title);
+    }
 }

@@ -13,7 +13,7 @@
             <div class="col-xs-10">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1>Panel title</h2>
+                        <h1>@yield('title')</h1>
                     </div>
                     <div class="panel-body">
                         @yield('content')
