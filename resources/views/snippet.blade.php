@@ -2,8 +2,9 @@
 <div class="snippet row">
 	<div class="col-xs-12">
 		<div class="h2 row">
-			<a class="col-xs-9" href="{{url('/'.$article->id)}}">{{ $article->title }}</a>
+			<a class="col-xs-6" href="{{url('/'.$article->id)}}">{{ $article->title }}</a>
 			<div class="col-xs-3"> <a href="{{url('/edit/'.$article->id)}}"><button>Edit</button> </a></div>
+			<div class="col-xs-3"> <a href="{{url('/delete/'.$article->id)}}"><button>Delete</button> </a></div>
 		</div>
 
 	</div>
