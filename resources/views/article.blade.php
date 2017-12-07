@@ -28,7 +28,7 @@
 		 <button type="submit"  > Save</button>
 	</form>
 	@else
-	<div class="snippet-text"> {{$article->body}}</div>
+	<div class="snippet-text"> {!!$article->body!!}</div>
 
 	@endif
 
