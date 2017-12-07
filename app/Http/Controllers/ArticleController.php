@@ -27,7 +27,7 @@ class ArticleController extends Controller
             $title = $article->title;
         }
 
-        return view('article')->withArticle($article)->withTitle($title);
+        return view('article')->withArticle($article)->withTitle($title)->withEditing(0);
     }
 
     public function edit($id)
@@ -41,5 +41,18 @@ class ArticleController extends Controller
         }
 
         return view('article')->withArticle($article)->withTitle($title)->withEditing(1);
+    }
+
+
+    public function update(Request $request)
+    {
+        if ($request->id != '') //editing an existing article
+            {
+                $post = Article::where('id', $request->id)->first();
+                $post->title = $request->title;
+                $post->body = $request->body;
+                $post->save();
+                return redirect('edit/'.$post->id)->withMessage('Saved successfully');
+            }
     }
 }

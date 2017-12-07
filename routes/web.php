@@ -16,3 +16,9 @@ Route::get('/',['as' => 'results', 'uses' => 'ArticleController@index']);
 Route::get('/{id}',['as' => 'article', 'uses' => 'ArticleController@view'])->where('id', '[A-Za-z0-9-_]+');
 
 Route::get('edit/{id}',['as' => 'article', 'uses' => 'ArticleController@edit'])->where('id', '[A-Za-z0-9-_]+');
+
+
+
+
+       // update post
+    Route::post('update','ArticleController@update');
