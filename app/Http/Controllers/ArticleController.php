@@ -34,25 +34,41 @@ class ArticleController extends Controller
     {
         $article = Article::where('id',$id)->first();
         if ($article){
-            if (!$article->live){
-                return redirect('/')->withErrors('requested page not found');
-            }
+
             $title = $article->title;
         }
 
         return view('article')->withArticle($article)->withTitle($title)->withEditing(1);
     }
 
+    public function new()
+    {
+
+        return view('article')->withEditing(1);
+    }
+
 
     public function update(Request $request)
     {
-        if ($request->id != '') //editing an existing article
-            {
-                $post = Article::where('id', $request->id)->first();
-                $post->title = $request->title;
-                $post->body = $request->body;
-                $post->save();
-                return redirect('edit/'.$post->id)->withMessage('Saved successfully');
-            }
+        if ($request->id != ''){ //editing an existing article
+            $post = Article::where('id', $request->id)->first();
+
+        }else{
+            $post = new Article();
+        }
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->snippet_text = $this->get_string_between($request->body,'<p>', '</p>');
+        $post->save();
+        return redirect('edit/'.$post->id)->withMessage('Saved successfully');
+    }
+
+    private function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }
