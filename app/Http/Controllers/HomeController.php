@@ -21,9 +21,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        dd($request->user()->is_admin());
         return view('home');
     }
 }
