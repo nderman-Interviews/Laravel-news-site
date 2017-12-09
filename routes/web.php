@@ -11,17 +11,34 @@
 |
  */
 
-Route::get('new', 'ArticleController@new');
-// delete post
-Route::get('delete/{id}', 'ArticleController@delete');
+Auth::routes();
+
 
 Route::get('/', ['as' => 'results', 'uses' => 'ArticleController@index']);
 
 Route::get('/{id}', ['as' => 'article', 'uses' => 'ArticleController@view'])->where('id', '[A-Za-z0-9-_]+');
 
-Route::get('edit/{id}', ['as' => 'article', 'uses' => 'ArticleController@edit'])->where('id', '[A-Za-z0-9-_]+');
 
 
-// update post
-Route::post('update', 'ArticleController@update');
+Route::group(['middleware' => ['auth']], function()
+{
+
+
+});
+
+
+Route::group(['middleware' => ['admin']], function() {
+    Route::get('new', 'ArticleController@new');
+
+    Route::get('edit/{id}', ['as' => 'article', 'uses' => 'ArticleController@edit'])->where('id', '[A-Za-z0-9-_]+');
+
+    Route::get('delete/{id}', 'ArticleController@delete');
+
+    // update post
+    Route::post('update', 'ArticleController@update');
+});
+
+
+
+
 
