@@ -43,60 +43,60 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    Logout
                                 </a>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    <div class="container">
-            @if (Session::has('message'))
-            <div class="flash alert-info">
-                <p class="panel-body">
-                    {{ Session::get('message') }}
-                </p>
-            </div>
-            @endif
-            @if ($errors->any())
-            <div class='flash alert-danger'>
-                <ul class="panel-body">
-                    @foreach ( $errors->all() as $error )
-                    <li>
-                        {{ $error }}
+                        </ul>
                     </li>
-                    @endforeach
+                    @endguest
                 </ul>
             </div>
-            @endif
-
         </div>
+    </nav>
+    <div class="container">
+        @if (Session::has('message'))
+        <div class="flash alert-info">
+            <p class="panel-body">
+                {{ Session::get('message') }}
+            </p>
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class='flash alert-danger'>
+            <ul class="panel-body">
+                @foreach ( $errors->all() as $error )
+                <li>
+                    {{ $error }}
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
-
-       @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('content')
+</div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

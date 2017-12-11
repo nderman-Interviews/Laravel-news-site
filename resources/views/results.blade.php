@@ -10,16 +10,16 @@
 		@if (!Auth::guest())
 
 		@if (Auth::user()->is_admin())
-        	<div class="h2"><a href="{{url('/new')}}"><button>New Article</button></a></div>
-        @endif
+       <div class="h2"><a href="{{url('/new')}}"><button>New Article</button></a></div>
+       @endif
 
-		@endif
-    </div>
-    @foreach ($articles as $article)
-    	<ul class="list-group">
-    	@include('snippet', ['artilce' => $article])
-    </ul>
-    @endforeach
-    {{ $articles->links() }}
-    </div>
+       @endif
+   </div>
+   @foreach ($articles as $article)
+   <ul class="list-group">
+       @include('snippet', ['artilce' => $article])
+   </ul>
+   @endforeach
+   {{ $articles->links() }}
+</div>
 @endsection
