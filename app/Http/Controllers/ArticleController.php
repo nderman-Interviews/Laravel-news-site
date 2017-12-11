@@ -24,7 +24,7 @@ class ArticleController extends Controller
             }
             $title = $article->title;
         }
-        $comments = Comments::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
+        $comments = Comments::where('article_id', $id)->orderBy('created_at', 'desc')->paginate(5);
 
         return view('article')->withArticle($article)->withTitle($title)->withEditing(0)->withComments($comments);
     }
@@ -43,6 +43,17 @@ class ArticleController extends Controller
     function new () {
 
         return view('article')->withEditing(1);
+    }
+
+    public function add_comment(Request $request)
+    {
+
+        $comment             = new Comments();
+        $comment->body       = $request->body;
+        $comment->author_id  = $request->user_id;
+        $comment->article_id = $request->article_id;
+        $comment->save();
+        return redirect('/' . $request->article_id)->withMessage('Comment saved successfully');
     }
 
     public function update(Request $request)

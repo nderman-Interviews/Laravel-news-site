@@ -23,7 +23,8 @@ Route::get('/{id}', ['as' => 'article', 'uses' => 'ArticleController@view'])->wh
 
 Route::group(['middleware' => ['auth']], function()
 {
-
+    // create comment post
+    Route::post('add_comment', 'ArticleController@add_comment');
 
 });
 

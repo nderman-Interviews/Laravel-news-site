@@ -37,6 +37,19 @@
 		</div>
 	</div>
 	@if (Auth::user())
+		<div class="panel panel-default">
+		<form method="post" action='{{ url("/add_comment") }}'>
+			<div class="form-group">
+			<textarea name="body"></textarea>
+			</div>
+			<input name="user_id" type="hidden" placeholder="" value="{{Auth::user()->id}}">
+			<input name="article_id" type="hidden" placeholder="" value="{{$article->id}}">
+
+			{{ csrf_field() }}
+
+		<button type="submit"  > Submit Comment</button>
+		</form>
+		</div>
 		  @foreach ($comments as $comment)
 			   <ul class="list-group">
 			       @include('comment', ['comment' => $comment])
