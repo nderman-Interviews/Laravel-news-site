@@ -21,7 +21,7 @@ Route::get('/{id}', ['as' => 'article', 'uses' => 'ArticleController@view'])->wh
 
 
 
-Route::group(['middleware' => ['auth']], function()
+Route::group(['middleware' => ['auth']], function() //registered users permissions
 {
     // create comment post
     Route::post('add_comment', 'ArticleController@add_comment');
@@ -29,14 +29,17 @@ Route::group(['middleware' => ['auth']], function()
 });
 
 
-Route::group(['middleware' => ['admin']], function() {
+Route::group(['middleware' => ['admin']], function() { //admin only permissions
+    //create new article form
     Route::get('new', 'ArticleController@new');
 
+    //edit or create article
     Route::get('edit/{id}', ['as' => 'article', 'uses' => 'ArticleController@edit'])->where('id', '[A-Za-z0-9-_]+');
 
+    //delete article
     Route::get('delete/{id}', 'ArticleController@delete');
 
-    // update post
+    // update artilce
     Route::post('update', 'ArticleController@update');
 });
 

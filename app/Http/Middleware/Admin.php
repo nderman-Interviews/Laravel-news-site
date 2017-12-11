@@ -15,7 +15,7 @@ class Admin
      * @return mixed
      */
 
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next, $guard = null) //authorization for admin users to allow crud functionality
   {
     if (Auth::guard($guard)->guest()) {
       if ($request->ajax()) {
