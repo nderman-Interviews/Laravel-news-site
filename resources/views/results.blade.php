@@ -17,7 +17,7 @@
    </div>
    @foreach ($articles as $article)
    <ul class="list-group">
-       @include('snippet', ['artilce' => $article])
+    @include('snippet', ['article' => $article])
    </ul>
    @endforeach
    {{ $articles->links() }}

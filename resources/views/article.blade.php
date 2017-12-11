@@ -37,7 +37,11 @@
 		</div>
 	</div>
 	@if (Auth::user())
-
+		  @foreach ($comments as $comment)
+			   <ul class="list-group">
+			       @include('comment', ['comment' => $comment])
+			   </ul>
+		   @endforeach
 	@endif
 </div>
 @endsection

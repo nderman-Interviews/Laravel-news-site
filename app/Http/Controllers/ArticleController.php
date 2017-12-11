@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Comments;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -23,8 +24,9 @@ class ArticleController extends Controller
             }
             $title = $article->title;
         }
+        $comments = Comments::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
 
-        return view('article')->withArticle($article)->withTitle($title)->withEditing(0);
+        return view('article')->withArticle($article)->withTitle($title)->withEditing(0)->withComments($comments);
     }
 
     public function edit($id)
